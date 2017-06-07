@@ -6,42 +6,62 @@
   <body>
     <a-scene>
       <a-assets>
+        <img id="stats" src="stats.jpg">
+        <video id="boat" src="" autoplay="none" loop="true"></video>
       </a-assets>
-      <a-plane material="color:white" rotation="-90 0 0" width="10" height="10"></a-plane>
-      <a-box width="10" height="10" depth="10" material="side:double;color:white"></a-box>
-      <a-plane id="front" height="2" width="2" position="0 2 -5" material="color:grey;side:double;" clickable>
-        <a-text value="Stats" color="black" position="-0.5 0.5 0"></a-text>
+
+      <a-plane id="floor" material="color:white" rotation="-90 0 0" width="10" height="10"></a-plane>
+      <a-box id="room" width="10" height="10" depth="10" material="side:double;color:white">
+        <a-text value="Look at the square to learn statistics about VR porn" color="black" position="-3 2 -5" visible="true"></a-text>
+        <a-plane id="front" height="1" width="1" position="0 3 -4" material="color:grey;side:double;" visible="true"></a-plane>
+        <a-plane id="statistics" src="#stats" width="5" height="5" position="0 2 -4" visible="false"></a-plane>
+        <a-text value="Look at the square to learn the history of VR porn" color="black" position="5 2 -3" rotation="0 -90 0"></a-text>
+        <a-plane id="right" height="1" width="1" rotation="0 -90 0" position="4 3 1" material="color:grey;side:double;"></a-plane>
+        <a-plane id="historical" src="#stats" width="5" height="5" rotation="0 -90 0" position="4 2 0" visible="false"></a-plane>
+      </a-box>
+      <a-videosphere id="boatvid" src="#boat" rotation="0 180 0"  visible="false"></a-videosphere>
+      <a-plane id="stop" height="0.5" width="1" position="0 3 -4" material="color:red;" visible="false">
+        <a-text value="Exit" color="black" position="-0.2 0 0"></a-text>
       </a-plane>
-      <a-plane id="right" height="2" width="2" rotation="0 -90 0" position="5 2 0" material="color:grey;side:double;">
-        <a-text value="History" color="black" position="-0.5 0.5 0"></a-text>
-      </a-plane>
+
+
+
+      <!-- </a-plane>
       <a-plane id="back" height="2" width="2" position="0 2 5" material="color:grey;side:double;">
         <a-text value="Audience" color="black" position="0.5 0.5 0" rotation="0 180 0"></a-text>
       </a-plane>
       <a-plane id="left" height="2" width="2" rotation="0 -90 0" position="-5 2 0" material="color:grey;side:double;">
-        <a-text value="Go" color="black" rotation="0 180 0" position="0 0.5 0"></a-text>
-      </a-plane>
+        <a-text value="Try it" color="black" rotation="0 180 0" position="0 0.5 0"></a-text>
+      </a-plane> -->
       <a-light type="point" intensity="1" position="0 4 0"></a-light>
-      <a-camera look-controls="true" wasd-controls="true">
-        <a-cursor
-          fuse="true"
-          fuseTimeout="1500"
-          position="0 0 -5"
-          geometry="primitive: ring"
-          material="color: black; shader: flat"
-          click="2000">
-          <a-animation begin="cursor-fusing" attribute="material.color" from="black" to="cyan" end="200"></a-animation>
-          <a-animation begin="click" attribute="material.color" from="cyan" to="red" end="200"></a-animation>
-          <a-animation begin="mouseleave" attribute="material.color" to="black" end="200"></a-animation>
+
+      <a-camera>
+        <a-cursor fuse="true">
+          <a-animation begin="cursor-fusing" attribute="material" from="black" to="cyan" ></a-animation>
         </a-cursor>
       </a-camera>
+
     </a-scene>
+
   <script>
-    AFRAME.registerComponent('clickable', function(){
-        this.addEventListener('click', function (){
-          this.setAttribute('material', 'color', 'blue');
-        });
-      });
+    document.getElementById("front").addEventListener('click', function(){
+      document.getElementById("statistics").setAttribute("visible", "true");
+    });
+    document.getElementById("right").addEventListener('click', function(){
+      document.getElementById("floor").setAttribute("visible", "false");
+      document.getElementById("room").setAttribute("visible", "false");
+      document.getElementById("boatvid").setAttribute("visible", "true");
+      document.getElementById("stop").setAttribute("visible", "true");
+      document.getElementById("boat").setAttribute("src", "Boat.mp4");
+    });
+    document.getElementById("stop").addEventListener("click", function(){
+      document.getElementById("boat").setAttribute("src", "");
+      document.getElementById("boatvid").setAttribute("visible", "false");
+      document.getElementById("room").setAttribute("visible", "true");
+      document.getElementById("floor").setAttribute("visible", "true");
+      document.getElementById("stop").setAttribute("visible", "false");
+    });
+
   </script>
 </body>
 </html>
