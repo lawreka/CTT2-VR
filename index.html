@@ -55,13 +55,15 @@
   <script>
 
     document.getElementById("door").addEventListener('click', function(){
+      document.getElementById("howitsmade").setAttribute("src", "#btsstill");
       document.getElementById("floor").setAttribute("visible", "false");
       document.getElementById("room").setAttribute("visible", "false");
       document.getElementById("boatvid").setAttribute("visible", "true");
       document.getElementById("stop").setAttribute("visible", "true");
       document.getElementById("boat").setAttribute("src", "Boat.mp4");
-      document.getElementById("howitsmade").setAttribute("src", "#btsstill");
+
     });
+
     document.getElementById("stop").addEventListener("click", function(){
       document.getElementById("boat").setAttribute("src", "");
       document.getElementById("boatvid").setAttribute("visible", "false");
@@ -69,6 +71,7 @@
       document.getElementById("floor").setAttribute("visible", "true");
       document.getElementById("stop").setAttribute("visible", "false");
     });
+
     document.getElementById("howitsmade").addEventListener("click", function(){
       this.setAttribute("src", "#bts");
     })
